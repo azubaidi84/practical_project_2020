@@ -12,12 +12,6 @@ The output is stored in BIDS format.
 def mps_extract(filename, sr = 44100, n_fft, hop_length = 512, mps_n_fft, 
                 mps_hop_length = mps_n_fft, plot_mps = True, **kwargs) 
 ```
-
-
-      File "<ipython-input-5-336544780b49>", line 2
-        mps_hop_length = mps_n_fft, plot_mps = True, **kwargs)
-                                                               ^
-    SyntaxError: invalid syntax
     
 
 
@@ -87,7 +81,7 @@ if mps_hop_length >= mel_spec.shape[1]
 
 **Step 4.**
 
-Extract Mps by looping through spectrogram with pre-set window size (mps_n_fft) and pre-set hop_length (mps_hop_length)
+Extract MPS by looping through spectrogram with pre-set window size (mps_n_fft) and pre-set hop_length (mps_hop_length). Also extracting the Nyquist Frequency. mps_all will be converted to a numpy array. 
 
 
 ```python
@@ -151,6 +145,10 @@ Extract names of the features in the MPS
 ```python
  freqs = ['{0:.0f} Hz ({1}Mel)'.format(freq, log_dict[log]) for freq in freqs]
 ```
+
+**Step 7.**
+
+Determine the repitition time between two mps.
 
 
 ```python
