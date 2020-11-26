@@ -1,0 +1,50 @@
+MPS Feature Extractor
+********************
+
+This is a function to extract the Modulation Power Spectrum based on the MEL Spectrogram with a 2D Fourier Transform from wav files. 
+The output is stored in BIDS format. 
+
+def mps_extract(filename, sr = 44100, n_fft = , hop_length = 512, mps_n_fft =, 
+                mps_hop_length = mps_n_fft, plot_mps = True, **kwargs) 
+                
+                
+Input
+
+filename:       str, path to wav files to be converted
+output path:    ?
+sr:             int, sampling rate for wav file (Default: 44100 Hz)
+n_fft:          int, window size for mel spectrogram extraction
+hop_length:     int, step size for mel spectrogram extraction
+mps_n_fft:      int, window size for mps extraction
+mps_hop_length: int, step size for mps extraction (Default: mps_hop_length = mps_n_fft)
+plot_mps:       bool, if true mps will be plotted (Default: True)
+kwargs:         additional keyword arguments that will be transferred to librosa's melspectrogram function
+
+Output
+
+tuple of a feature representation (2-dimensional array: time x feature)
+repitition time in seconds
+names of all features (list of strings of mod/s for each mod/Hz)        
+
+
+Loading Packages 
+
+import numpy as np
+import matplotlib.pyplot as plt
+import librosa as lbr
+import json
+import os
+import warnings            
+import pandas as pd 
+
+Extracting wav files from directory
+
+wav, _ = lbr.load(filename, sr=sr) 
+
+
+Extracting Mel spectrogram
+mel_spec = lbr.feature.melspectrogram(y=wav, sr=sr, hop_length=hop_length,
+                                              **kwargs)
+                                              
+                                              
+                                             
