@@ -6,4 +6,12 @@ The function is based on the MEL spectrogram and the 2D Fourier Transform.
 Use with 'code to use it'
 
 # Usage
-usage: mps_extractor.py []
+<pre> 
+usage: mps_extract.py
+
+positional arguments:
+
+
+optional arguments:
+
+</pre>
