@@ -12,14 +12,15 @@ usage: mps_extract.py
 
 positional arguments:
 -------
-  filename :  str, path to wav files to be converted. Can be used with wildcard * .wav. 
-  n_fft:
-  mps_n_fft: 
-  hop_length:
-  
+  filename :    	str, path to wav files to be converted. Can be used with wildcard * .wav. 
 
 keyword arguments:
 ------
+  n_fft:        int, window length of spectrogram
+  mps_n_fft:    int, windto length for extracting the MPS
+  hop_length:   int, step size for extracting MEL spectrogram 
+  sr:           int, sampling rate (Hz) of auditory files (set to 44100 Hz by default)
+  
 optional arguments:
 ------
 
