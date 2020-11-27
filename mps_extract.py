@@ -4,7 +4,7 @@
 # In[ ]:
 
 
-''''
+'''
 Author: Janne Nold 
 
     
@@ -14,7 +14,7 @@ MPS Feature Extractor
 This is a function to extract the Modulation Power Spectrum based on the MEL Spectrogram with a 2D Fourier Transform from wav files. 
 The output is stored in BIDS format. 
 
-''''
+'''
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -48,7 +48,7 @@ tuple of a feature representation (2-dimensional array: time x feature)
 repitition time in seconds
 names of all features (list of strings of mod/s for each mod/Hz)        
 
-''''
+'''
 
 
 
