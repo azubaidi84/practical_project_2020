@@ -96,9 +96,10 @@ for i in range(1,101)
     
     # Flattening the mps to a vector
     mps = np.reshape(mps,(1,np.size(mps)) 
-    
+   
     mps_all.append(np.abs(fftshift(mps)))
     
+    # concatinating multiple mps row wise? 
     
  np.array(mps_all)
     
