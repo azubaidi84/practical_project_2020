@@ -95,7 +95,7 @@ for i in range(1,101)
     mps = fft2(mel_spec[:,mps_n_fft*start:mps_n_fft*i])
     
     # Flattening the mps to a vector
-    mps = np.reshape(.....)
+    mps = np.reshape(mps,(1,np.size(mps)) 
     
     mps_all.append(np.abs(fftshift(mps)))
     
