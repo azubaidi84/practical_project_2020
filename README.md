@@ -10,9 +10,15 @@ Use with
 <pre> 
 usage: mps_extract.py 
 
-positional arguments: filename
+positional arguments:
+-------
+  filename :  str, path to wav files to be converted. Can be used with wildcard * .wav.    
+  
 
-
+keyword arguments:
+------
 optional arguments:
+------
+
 
 </pre>
