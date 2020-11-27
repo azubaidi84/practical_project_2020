@@ -25,7 +25,7 @@ import warnings
 import pandas as pd 
 
 
-def mps_extract(filename, sr = 44100, n_fft = , hop_length = 512, mps_n_fft =, 
+def mps_extract(filename, sr = 44100, n_fft, hop_length, mps_n_fft, 
                 mps_hop_length = mps_n_fft, plot_mps = True, **kwargs)
 
                
