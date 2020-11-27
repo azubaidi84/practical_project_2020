@@ -12,7 +12,10 @@ usage: mps_extract.py
 
 positional arguments:
 -------
-  filename :  str, path to wav files to be converted. Can be used with wildcard * .wav.    
+  filename :  str, path to wav files to be converted. Can be used with wildcard * .wav. 
+  n_fft:
+  mps_n_fft: 
+  hop_length:
   
 
 keyword arguments:
