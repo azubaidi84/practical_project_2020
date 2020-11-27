@@ -1,3 +1,5 @@
+```python
+
 MPS Feature Extractor
 ********************
 
@@ -46,5 +48,5 @@ Extracting Mel spectrogram
 mel_spec = lbr.feature.melspectrogram(y=wav, sr=sr, hop_length=hop_length,
                                               **kwargs)
                                               
-                                              
+ ```                                             
                                              
