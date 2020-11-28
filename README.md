@@ -36,3 +36,8 @@ The function returns three outputs:
 1. a representation of a feature matrix of shape (sample x feature)
 2. the reptition time in seconds (int)
 3. the names of the features (as string)
+
+**Optional**
+
+The function can return the plotted MPS. By default, this is set to False and has to be indicated if needed otherwise.
+
