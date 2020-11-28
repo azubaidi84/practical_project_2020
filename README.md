@@ -25,6 +25,7 @@ keyword arguments:
   
 optional arguments:
 ------
+  plot_mps:       bool, plotting the mps (by default set to False)
 
 
 </pre>
