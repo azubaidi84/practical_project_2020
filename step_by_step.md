@@ -91,17 +91,19 @@ nyquist_mps = np.ceil(mel_spec.shape[0]/2)
 
 
 for i in range(1,101)
+    mps = np.fft.fft2(mel_spec[:,mps_n_fft*(i-1):mps_n_fft*i])
     
-    mps = fft2(mel_spec[:,mps_n_fft*start:mps_n_fft*i])
+    mps = np.abs(np.fft.fftshift(mps))
     
     # Flattening the mps to a vector
-    mps = np.reshape(mps,(1,np.size(mps)) 
+    mps = np.reshape(mps,(1,np.size(mps)))
    
-    mps_all.append(np.abs(fftshift(mps)))
+    mps_all.append(mps)
     
-    # concatinating multiple mps row wise? 
-    
- np.array(mps_all)
+    mps_all = np.array(mps_all)
+   
+    # Concatinating the MPS row-wise
+    mps_all = np.concatenate(mps_all)
     
     
     
@@ -123,18 +125,24 @@ mel_Hz_s = sr/n_fft # step size for MEL spectrogram Hz/sample (fundamental frequ
 mel_time_s = hop_length/sr # step size for MEL spectrogram sec/sample 
 
 # Calculate step sizes for MPS
-mod_per_s = mps_hop_length*mel_time_s
-mod_per_oct = 
+freq_step_log = np.log(mel_spec[1])
+freq_step_log = freq_step_log[1] - freq_step_log[0]
 
 # Calculate labels for X and Y axes
-mps_times = fftshift(fftfreq(0:mps_n_fft)
-mps_freqs = fftshift(fftfreq(mel_spec.shape[0],))
+mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) # returns fourier transformed freuqencies which are already shifted (lower freq in center))
+mps_times = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[0], d = mel_time_s))
 
-if plot_mps
-fig, ax = plt.subplot()
-
-
-
+# Plotting the MPS
+if plot_mps = True
+    
+fig, ax = plt.subplots()
+ax.imshow(np.log(mps_all))
+ax.pcolormesh(mps_times, mps_freqs, plot_mps, cmap ='viridis')
+ax.contour(mps_times, mps_freqs, mps_plt,np.percentile(plot_mps,[80,90,95,99]))       
+ax.set_title('Modulation Power Spectrum')
+ax.set_xlabel('mod/s')
+ax.set_ylabel('cyc/oct')
+    
 
 ```
 
@@ -144,7 +152,8 @@ Extract names of the features in the MPS
 
 
 ```python
- freqs = ['{0:.0f} Hz ({1}Mel)'.format(freq, log_dict[log]) for freq in freqs]
+names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct'.format(mps_time, mps_freq) \
+    for mps_time in mps_times for mps_freq in mps_freqs]
 ```
 
 **Step 7.**
