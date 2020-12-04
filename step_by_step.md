@@ -66,7 +66,8 @@ mel_spec = lbr.feature.melspectrogram(y=wav, sr=sr, hop_length=hop_length,
 # Transpose Mel spectrogram for further analyses and compatibility
 mel_spec = mel_spec.T
 ```
-![Mel](./Figure 2020-12-04 154854.png)
+![Mel](https://user-images.githubusercontent.com/73650127/101178590-7ba73400-3649-11eb-88f7-fbee7b5ec36b.png)
+
 
 **Step 3.**
 
