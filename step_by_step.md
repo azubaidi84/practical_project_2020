@@ -13,8 +13,6 @@ def mps_extract(filename, sr = 44100, n_fft, hop_length = 512, mps_n_fft,
                 mps_hop_length = mps_n_fft, plot_mps = True, **kwargs) 
 ```
     
-
-
 ### Input
 
 - filename:        str, path to wav files to be converted
@@ -64,10 +62,11 @@ Extract MEL Spectogram from wav files
 ```python
 mel_spec = lbr.feature.melspectrogram(y=wav, sr=sr, hop_length=hop_length,
                                               **kwargs)
-                                                                                           
+                                                                                          
 # Transpose Mel spectrogram for further analyses and compatibility
 mel_spec = mel_spec.T
 ```
+<img src="/home/jnold/Desktop/Figure 2020-12-04 154854.png" alt="MEL"/>
 
 **Step 3.**
 
