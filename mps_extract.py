@@ -31,7 +31,6 @@ def mps_extract(filename, sr = 44100, n_fft = 512, hop_length = 512, mps_n_fft =
 Input
 
 filename:       str, path to wav files to be converted
-output path:    ?
 sr:             int, sampling rate for wav file (Default: 44100 Hz)
 n_fft:          int, window size for mel spectrogram extraction
 hop_length:     int, step size for mel spectrogram extraction
@@ -65,7 +64,7 @@ if mps_hop_length >= mel_spec.shape[0]:
     raise ValueError("The mps step size exceeds the Mel spectrogram. Please enter a smaller integer.")
 
 
-# Extracting mps
+# Extracting MPS
 mps_all = []
 nyquist_mps = np.ceil(mel_spec.shape[1]/2)
 
@@ -74,13 +73,16 @@ nyquist_mps = np.ceil(mel_spec.shape[1]/2)
 for i in range(1,101):
     mps = np.fft.fft2(mel_spec[mps_n_fft*(i-1):mps_n_fft*i,:])
     
+    # shift the frequqnecies of the mps and use absolute numbers
     mps = np.abs(np.fft.fftshift(mps))
     
     # Flattening the mps to a vector
     mps = np.reshape(mps,(1,np.size(mps)))
    
+    # Append each mps
     mps_all.append(mps)
     
+    # Convert to array
     mps_all = np.array(mps_all)
    
     # Concatinating the MPS row-wise
