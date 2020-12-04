@@ -18,7 +18,6 @@ def mps_extract(filename, sr = 44100, n_fft, hop_length = 512, mps_n_fft,
 ### Input
 
 - filename:        str, path to wav files to be converted
-- output path:?
 - sr:              int, sampling rate for wav file (*Default*: 44100 Hz)
 - n_fft:           int, window size for mel spectrogram extraction (*Default*:512)
 - hop_length:      int, step size for mel spectrogram extraction (*Default*: 512)
