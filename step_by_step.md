@@ -86,7 +86,6 @@ Extract MPS by looping through spectrogram with pre-set window size (mps_n_fft) 
 
 ```python
 mps_all = []
-start = range(0,mel_spec.shape[1]//mps_n_fft)
 nyquist_mps = np.ceil(mel_spec.shape[0]/2)
 
 
@@ -132,16 +131,7 @@ freq_step_log = freq_step_log[1] - freq_step_log[0]
 mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) # returns fourier transformed freuqencies which are already shifted (lower freq in center))
 mps_times = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[0], d = mel_time_s))
 
-# Plotting the MPS
-if plot_mps = True
-    
-fig, ax = plt.subplots()
-ax.imshow(np.log(mps_all))
-ax.pcolormesh(mps_times, mps_freqs, plot_mps, cmap ='viridis')
-ax.contour(mps_times, mps_freqs, mps_plt,np.percentile(plot_mps,[80,90,95,99]))       
-ax.set_title('Modulation Power Spectrum')
-ax.set_xlabel('mod/s')
-ax.set_ylabel('cyc/oct')
+ 
     
 
 ```
