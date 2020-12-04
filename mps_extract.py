@@ -96,17 +96,16 @@ mel_Hz_s = sr/n_fft # step size for MEL spectrogram Hz/sample (fundamental frequ
 mel_time_s = hop_length/sr # step size for MEL spectrogram sec/sample 
 
 # Calculate step sizes for MPS
-mod_per_s = mps_hop_length*mel_time_s
-mod_per_oct = 
+
 
 # Calculate labels for X and Y axes
-mps_times = fftshift(fftfreq(0:mps_n_fft)
-mps_freqs = fftshift(fftfreq(mel_spec.shape[0],))
-
+mps_freqs = np.fft.fftshift((np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log))
+mps_times = np.fft.fftshift((np.fft.fftfreq(mel_spec.shape[0], d = time_step_log))                      
+                            
 # Plotting the MPS
 if plot_mps = True
   fig, ax = plt.subplots()
-   ax.imshow(np.log(mps_all))
+  ax.imshow(np.log(mps_all))
   ax.pcolormesh(mps_times, mps_freqs, plot_mps, cmap ='viridis')
   ax.contour(mps_times, mps_freqs, mps_plt,np.percentile(plot_mps,[80,90,95,99]))       
   ax.set_title('Modulation Power Spectrum')
