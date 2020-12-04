@@ -33,7 +33,6 @@ def mps_extract(filename, sr = 44100, n_fft, hop_length, mps_n_fft,
 Input
 
 filename:       str, path to wav files to be converted
-output path:    ?
 sr:             int, sampling rate for wav file (Default: 44100 Hz)
 n_fft:          int, window size for mel spectrogram extraction
 hop_length:     int, step size for mel spectrogram extraction
@@ -70,22 +69,23 @@ if mps_hop_length >= mel_spec.shape[1]
 
 # Extracting mps
 mps_all = []
-start = range(0,mel_spec.shape[1]//mps_n_fft)
 nyquist_mps = np.ceil(mel_spec.shape[0]/2)
 
 
 for i in range(1,101)
+    mps = np.fft.fft2(mel_spec[:,mps_n_fft*(i-1):mps_n_fft*i])
     
-    mps = fft2(mel_spec[:,mps_n_fft*start:mps_n_fft*i])
+    mps = np.abs(np.fft.fftshift(mps))
     
     # Flattening the mps to a vector
-    mps = np.reshape(mps,(1,np.size(mps)) 
+    mps = np.reshape(mps,(1,np.size(mps)))
    
-    mps_all.append(np.abs(fftshift(mps)))
+    mps_all.append(mps)
     
-    # concatinating multiple mps row wise? 
-    
- np.array(mps_all)
+    mps_all = np.array(mps_all)
+   
+    # Concatinating the MPS row-wise
+    mps_all = np.concatenate(mps_all)
                      
                      
 # Extract Axis units for plotting 
@@ -103,11 +103,19 @@ mod_per_oct =
 mps_times = fftshift(fftfreq(0:mps_n_fft)
 mps_freqs = fftshift(fftfreq(mel_spec.shape[0],))
 
-if plot_mps
-fig, ax = plt.subplot()
+# Plotting the MPS
+if plot_mps = True
+  fig, ax = plt.subplots()
+   ax.imshow(np.log(mps_all))
+  ax.pcolormesh(mps_times, mps_freqs, plot_mps, cmap ='viridis')
+  ax.contour(mps_times, mps_freqs, mps_plt,np.percentile(plot_mps,[80,90,95,99]))       
+  ax.set_title('Modulation Power Spectrum')
+  ax.set_xlabel('mod/s')
+  ax.set_ylabel('cyc/oct')
                      
 # Extracting feature names                     
-freqs = ['{0:.0f} Hz ({1}Mel)'.format(freq, log_dict[log]) for freq in freqs]
+names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct'.format(mps_time, mps_freq) \
+    for mps_time in mps_times for mps_freq in mps_freqs
                      
                      
 return mps_all, mps_rep_time, names_features
