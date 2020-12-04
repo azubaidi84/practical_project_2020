@@ -64,7 +64,7 @@ Extract MEL Spectogram from wav files
 ```python
 mel_spec = lbr.feature.melspectrogram(y=wav, sr=sr, hop_length=hop_length,
                                               **kwargs)
-                                              
+                                                                                           
 # Transpose Mel spectrogram for further analyses and compatibility
 mel_spec = mel_spec.T
 ```
