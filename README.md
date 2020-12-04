@@ -17,10 +17,10 @@ positional arguments:
 keyword arguments:
 ------
   sr:             int, sampling rate (Hz) of auditory files (set to 44100 Hz by default)
-  n_fft:          int, window length of spectrogram
-  mps_n_fft:      int, window length for extracting the MPS
-  hop_length:     int, step size for extracting MEL spectrogram 
-  mps_hop_length: int, step size for extracting MPS (set to mps_n_fft by default for non-overlapping windows)
+  n_fft:          int, window length of spectrogram (default 512)
+  mps_n_fft:      int, window length for extracting the MPS (default 500)
+  hop_length:     int, step size for extracting MEL spectrogram (default 512)
+  mps_hop_length: int, step size for extracting MPS (default 500)
   
   
 optional arguments:
@@ -42,3 +42,4 @@ The function returns three outputs:
 
 The function can return the plotted MPS. By default, this is set to False and has to be indicated if needed otherwise.
 
+*Note*: Default settings are set so the windows for the extraction of the Mel spectrogram and the MPS each are non-overlapping.
