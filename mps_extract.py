@@ -32,11 +32,11 @@ Input
 
 filename:       str, path to wav files to be converted
 sr:             int, sampling rate for wav file (Default: 44100 Hz)
-n_fft:          int, window size for mel spectrogram extraction
-hop_length:     int, step size for mel spectrogram extraction
-mps_n_fft:      int, window size for mps extraction
-mps_hop_length: int, step size for mps extraction (Default: mps_hop_length = mps_n_fft)
-plot_mps:       bool, if true mps will be plotted (Default: True)
+n_fft:          int, window size for mel spectrogram extraction (Deafult: 512)
+hop_length:     int, step size for mel spectrogram extraction (Default: 512)
+mps_n_fft:      int, window size for mps extraction (Default: 500)
+mps_hop_length: int, step size for mps extraction (Default: 500)
+plot_mps:       bool, if true mps will be plotted (Default: False)
 kwargs:         additional keyword arguments that will be transferred to librosa's melspectrogram function
 
 Output
@@ -45,6 +45,7 @@ tuple of a feature representation (2-dimensional array: samples x feature)
 repitition time in seconds
 names of all features (list of strings of mod/s for each mod/Hz)        
 
+*Note*: Default settings are set so the windows for the extraction of the Mel spectrogram and the MPS each are non-overlapping.
 '''
 
 # Extracting wav files from directory
