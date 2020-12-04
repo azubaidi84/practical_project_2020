@@ -45,7 +45,7 @@ tuple of a feature representation (2-dimensional array: samples x feature)
 repitition time in seconds
 names of all features (list of strings of mod/s for each mod/Hz)        
 
-*Note*: Default settings are set so the windows for the extraction of the Mel spectrogram and the MPS each are non-overlapping.
+Note: Default settings are set so the windows for the extraction of the Mel spectrogram and the MPS each are non-overlapping.
 '''
 
 # Extracting wav files from directory
