@@ -114,18 +114,19 @@ time_step_log = time_step_log[1] - time_step_log[0]
 
 # Calculate labels for X and Y axes
 mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) # returns fourier transformed freuqencies which are already shifted (lower freq in center))
-mps_times = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[0], d = time_step_log))
+mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = time_step_log))
 
 
 if plot_mps = True:
     fig, ax = plt.subplots()
-    plt.imshow(mps_all[0])
-    ax.pcolormesh(mps_times, mps_freqs, plot_mps, cmap ='viridis')
-    ax.contour(mps_times, mps_freqs, mps_plt,np.percentile(plot_mps,[80,90,95,99]))       
+    image = ax.imshow(mps_all[0])
+    ax.pcolormesh(mps_times, mps_freqs, image??, cmap ='viridis')
+    ax.contour(mps_times, mps_freqs, image??,np.percentile(image??,[80,90,95,99]))       
     ax.set_title('Modulation Power Spectrum')
     ax.set_xlabel('mod/s')
     ax.set_ylabel('cyc/oct')
-    
+    plt.setp(ax, xlim = [-10,10], ylim=[0,9])
+
 
 # Extracting feature names                     
 names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) for mps_time in mps_times for mps_freq in mps_freqs]
