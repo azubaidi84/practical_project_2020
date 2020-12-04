@@ -9,8 +9,8 @@ The output is stored in BIDS format.
 
 
 ```python
-def mps_extract(filename, sr = 44100, n_fft, hop_length = 512, mps_n_fft, 
-                mps_hop_length = mps_n_fft, plot_mps = True, **kwargs) 
+def mps_extract(filename, sr = 44100, n_fft, hop_length = 512, mps_n_fft = 500, 
+                mps_hop_length = 500, plot_mps = False, **kwargs) 
 ```
     
 ### Input
