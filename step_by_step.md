@@ -179,6 +179,12 @@ names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) fo
 
 Determine the repitition time between two mps.
 
+```python
+mps_rep_time = fs_mps
+```
+
+**Step 8.**
+Declare output. 
 
 ```python
 return mps_all, mps_rep_time, names_features
