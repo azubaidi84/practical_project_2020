@@ -123,6 +123,9 @@ if plot_mps = True:
     plt.setp(ax, xlim = [-10,10], ylim=[0,9])
 
     
+# Determine MPS repition time
+mps_rep_time = fs_spectrogram/mps_hop_length
+    
 
 # Extracting feature names                     
 names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) for mps_time in mps_times for mps_freq in mps_freqs]
