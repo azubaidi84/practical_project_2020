@@ -122,19 +122,19 @@ time_step_log = mel_spec[:,1]
 time_step_log = time_step_log[1] - time_step_log[0]
 
 # Calculate labels for X and Y axes
-mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) # returns fourier transformed freuqencies which are already shifted (lower freq in center))
-mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = time_step_log/fs_spectrogram/fs_mps))
+mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) 
+mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = 1. /fs_spectrogram))#time_step_log/fs_spectrogram/fs_mps))
 
 
 if plot_mps = True:
     fig, axs = plt.subplots(1, 2, figsize=(8, 4), sharex = True, sharey = True)
-    for ax, mps_plt in zip(axs, [np.log(mps_plot[0]),np.log(mps_plot).mean(0)]):
-        ax.pcolormesh(mps_times, mps_freqs, mps_plt, cmap ='viridis')
-        ax.contour(mps_times, mps_freqs, mps_plt, np.percentile(image,[80,90,95,99]))
-        _ = plt.setp(ax, xlim=[-10,10], ylim=[0,9])
+    for ax, mps_plt in zip(axs, [np.log(mps_plot[0]),np.log(mps_plot).mean(0)]): 
+        ax.pcolormesh(mps_plt, cmap ='viridis',shading = 'float')
+        ax.contour(mps_plt, np.percentile(mps_plt, [80,90,95,99]))
+        #_ = plt.setp(ax, xlim=[-10,10], ylim=[0,9])
     axs[0].set_title('One Modulation Power Spectrum')
     axs[1].set_title('Mean Modulation Power Spectrum')
-    axs[0].set_xlabel('Temporal Modulation mod/s')
+    axs[0].set_xlabel('Temporal Modulation cyc/s')
     axs[0].set_ylabel('Spectral Modulation cyc/oct')
     
 
@@ -142,7 +142,6 @@ if plot_mps = True:
 names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) for mps_time in mps_times for mps_freq in mps_freqs]
 
 # Determine MPS repitition time 
-
 mps_rep_time = fs_spectrogram/mps_hop_length
             
                      
