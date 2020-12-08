@@ -162,9 +162,9 @@ if plot_mps = True:
     plt.setp(ax, xlim = [-10,10], ylim=[0,9])
 
     
-    
 
 ```
+![Figure 2020-12-08 124741](https://user-images.githubusercontent.com/73650127/101479961-4c4b3c80-3953-11eb-835c-802f8b14b0b9.png)
 
 **Step 6.**
 
