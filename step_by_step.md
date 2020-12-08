@@ -160,37 +160,18 @@ mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = time_step_log))
 Plot MPS
 
 ```python
-mps_all = []
-mps_plot = []
-nyquist_mps = np.ceil(mel_spec.shape[1]/2)
 
-
-
-for i in range(1,101):
+if plot_mps = True:
+    fig, axs = plt.subplots(1, 2, figsize=(8, 4), sharex = True, sharey = True)
+    for ax, mps_plt in zip(axs, [np.log(mps_plot[0]),np.log(mps_plot).mean(0)]): 
+        ax.pcolormesh(mps_plt, cmap ='viridis',shading = 'float')
+        ax.contour(mps_plt, np.percentile(mps_plt, [80,90,95,99]))
+        #_ = plt.setp(ax, xlim=[-10,10], ylim=[0,9])
+    axs[0].set_title('One Modulation Power Spectrum')
+    axs[1].set_title('Mean Modulation Power Spectrum')
+    axs[0].set_xlabel('Temporal Modulation cyc/s')
+    axs[0].set_ylabel('Spectral Modulation cyc/oct')
     
-    #Extract mps for predefined window
-    mps = np.fft.fft2(mel_spec[mps_n_fft*(i-1):mps_n_fft*i,:])
-   
-    # use absoulte and shifted frequencies
-    mps = np.abs(np.fft.fftshift(mps))
-    
-    # Define variable for later plotting
-    mps_plot.append(mps)
-   
-    # Flattening the mps to a vector
-    mps = np.reshape(mps,(1,np.size(mps)))
-    
-    # Append mps to mps all
-    mps_all.append(mps)
-    
-# Convert mps_all into an array outside the loop
-mps_all = np.array(mps_all)
-
-# Convert mps_plot into an array outside loop
-mps_plot = np.array(mps_plot)
-
-# Concatinating the MPS row-wise
-mps_all = np.concatenate(mps_all)
     
 ```
 ![Figure 2020-12-08 124741](https://user-images.githubusercontent.com/73650127/101479961-4c4b3c80-3953-11eb-835c-802f8b14b0b9.png)
