@@ -89,42 +89,47 @@ Extract MPS by looping through spectrogram with pre-set window size (mps_n_fft) 
 
 ```python
 mps_all = []
+mps_plot = []
 nyquist_mps = np.ceil(mel_spec.shape[1]/2)
 
 
 
 for i in range(1,101):
-    mps = np.fft.fft2(mel_spec[mps_n_fft*(i-1):mps_n_fft*i,:])
     
-    # shift the frequqnecies of the mps and use absolute numbers
+    #Extract mps for predefined window
+    mps = np.fft.fft2(mel_spec[mps_n_fft*(i-1):mps_n_fft*i,:])
+   
+    # use absoulte and shifted frequencies
     mps = np.abs(np.fft.fftshift(mps))
     
+    # Define variable for later plotting
+    mps_plot.append(mps)
+   
     # Flattening the mps to a vector
     mps = np.reshape(mps,(1,np.size(mps)))
-   
-    # Append each mps
+    
+    # Append mps to mps all
     mps_all.append(mps)
     
-    # Convert to array
-    mps_all = np.array(mps_all)
-   
-    # Concatinating the MPS row-wise
-    mps_all = np.concatenate(mps_all)
-    
-    
+# Convert mps_all into an array outside the loop
+mps_all = np.array(mps_all)
 
+# Convert mps_plot into an array outside loop
+mps_plot = np.array(mps_plot)
+
+# Concatinating the MPS row-wise
+mps_all = np.concatenate(mps_all)
 ```
 
 **Step 5.**
 
-Plot MPS 
+Extract Axis Labels 
 
 
 
 ```python
 
 # Raw Signal
-sr = 44100
 raw_length_sec = (len(wav)/sr)
 raw_length_min = raw_length_sec/60
 
@@ -148,21 +153,45 @@ time_step_log = time_step_log[1] - time_step_log[0]
 # Calculate labels for X and Y axes
 mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) # returns fourier transformed freuqencies which are already shifted (lower freq in center))
 mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = time_step_log))
+```
 
- 
+**Step 6.**
 
-if plot_mps = True:
-    fig, ax = plt.subplots()
-    image = ax.imshow(mps_all[0])
-    ax.pcolormesh(mps_times, mps_freqs, image??, cmap ='viridis')
-    ax.contour(mps_times, mps_freqs, image??,np.percentile(image??,[80,90,95,99]))       
-    ax.set_title('Modulation Power Spectrum')
-    ax.set_xlabel('mod/s')
-    ax.set_ylabel('cyc/oct')
-    plt.setp(ax, xlim = [-10,10], ylim=[0,9])
+Plot MPS
 
+```python
+mps_all = []
+mps_plot = []
+nyquist_mps = np.ceil(mel_spec.shape[1]/2)
+
+
+
+for i in range(1,101):
     
+    #Extract mps for predefined window
+    mps = np.fft.fft2(mel_spec[mps_n_fft*(i-1):mps_n_fft*i,:])
+   
+    # use absoulte and shifted frequencies
+    mps = np.abs(np.fft.fftshift(mps))
+    
+    # Define variable for later plotting
+    mps_plot.append(mps)
+   
+    # Flattening the mps to a vector
+    mps = np.reshape(mps,(1,np.size(mps)))
+    
+    # Append mps to mps all
+    mps_all.append(mps)
+    
+# Convert mps_all into an array outside the loop
+mps_all = np.array(mps_all)
 
+# Convert mps_plot into an array outside loop
+mps_plot = np.array(mps_plot)
+
+# Concatinating the MPS row-wise
+mps_all = np.concatenate(mps_all)
+    
 ```
 ![Figure 2020-12-08 124741](https://user-images.githubusercontent.com/73650127/101479961-4c4b3c80-3953-11eb-835c-802f8b14b0b9.png)
 
