@@ -49,7 +49,7 @@ names of all features (list of strings of mod/s for each mod/Hz)
 
 # Extracting wav files from directory
 wav, _ = lbr.load(filename, sr=sr) 
-
+# filename = '/data/fg_audio/*.wav'
 
 # Extracting Mel spectrogram
 mel_spec = lbr.feature.melspectrogram(y=wav, sr=sr, hop_length=hop_length,
@@ -98,19 +98,12 @@ mps_plot = np.array(mps_plot)
 mps_all = np.concatenate(mps_all)
     
 
-# Raw Signal
-raw_length_sec = (len(wav)/sr)
-raw_length_min = raw_length_sec/60
-
-#number_samples = sr*len(wav)/1000 ?
 
 # Sampling Rate in Mel Spectrogram
-fs_spectrogram = round(len(mel_spec)/(raw_length_sec))
-# alternatively sr/hop_length
+fs_spectrogram = sr/hop_length
 
-# Sampling rate in MPS 
-fs_mps = round(mps_n_fft/(raw_length_min))
-# would we be able to do fs_spectrogram/mps_hop_length
+# Sampling rate in MPS how many mps per second
+fs_mps = fs_spectrogram/mps_hop_length
 
  
 # Extract Axis units for plotting 
@@ -118,31 +111,51 @@ fs_mps = round(mps_n_fft/(raw_length_min))
 freq_step_log = np.log(mel_spec[1,:])
 freq_step_log = freq_step_log[1] - freq_step_log[0]
 
-time_step_log = mel_spec[:,1]
-time_step_log = time_step_log[1] - time_step_log[0]
 
 # Calculate labels for X and Y axes
 mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) 
-mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = 1. /fs_spectrogram))#time_step_log/fs_spectrogram/fs_mps))
-
+mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = 1. /fs_spectrogram)) 
 
 if plot_mps = True:
     fig, axs = plt.subplots(1, 2, figsize=(8, 4), sharex = True, sharey = True)
     for ax, mps_plt in zip(axs, [np.log(mps_plot[0]),np.log(mps_plot).mean(0)]): 
-        ax.pcolormesh(mps_plt, cmap ='viridis',shading = 'float')
-        ax.contour(mps_plt, np.percentile(mps_plt, [80,90,95,99]))
+        ax.imshow(mps_plt, cmap ='viridis',shading = 'float')
+        xticks = np.linspace(0,len(mps_times),10).astype(int)
+        ax.set_xticks(xticks)
+        ax.set_xticklabels(['{0:.f}'.format(xtick) for xtick in mps_times[xticks]])
+        
+        yticks = np.linspace(0,len(mps_freqs),10).astype(int)
+        ax.set_yticks(yticks)
+        ax.set_yticklabels(['{0:.f}'.format(ytick) for ytick in mps_times[yticks]])
+        
+        axs[0].set_title('One Modulation Power Spectrum')
+        axs[1].set_title('Mean Modulation Power Spectrum')
+        axs[0].set_xlabel('Temporal Modulation mpd/s')
+        axs[0].set_ylabel('Spectral Modulation cyc/oct')
+    
+# spectrogram zum ersten window mit mps nebeneinander plotten
+
+if plot_mps = True:
+    fig, axs = plt.subplots(1, 2, figsize=(8, 4), )
+    for ax, mps_plt in zip(axs, [np.log(mps_plot[0]),np.log(mel_spec[mps_n_fft*(i-1):mps_n_fft*i,:]]): 
+        ax.imshow(mps_times,mps_freqs,mps_plt, cmap ='viridis',shading = 'float')
+        
+       ax.get xticks = coordinaten in datenpunkten (x=0,500)
+        xticklabels (eas steht an stelle 0,100, etc in mps_times, das ist der input fr setxtick)
+        ax.setxticklabels
+        #ax.contour(mps_plt, np.percentile(mps_plt, [80,90,95,99]))
         #_ = plt.setp(ax, xlim=[-10,10], ylim=[0,9])
     axs[0].set_title('One Modulation Power Spectrum')
     axs[1].set_title('Mean Modulation Power Spectrum')
-    axs[0].set_xlabel('Temporal Modulation cyc/s')
+    axs[0].set_xlabel('Temporal Modulation mpd/s')
     axs[0].set_ylabel('Spectral Modulation cyc/oct')
     
-
 # Extracting feature names                     
-names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) for mps_time in mps_times for mps_freq in mps_freqs]
+names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) 
+                  for mps_time in mps_times for mps_freq in mps_freqs]
 
 # Determine MPS repitition time 
-mps_rep_time = fs_spectrogram/mps_hop_length
+mps_rep_time = 1/fs_mps
             
                      
 return mps_all, mps_rep_time, names_features
