@@ -123,17 +123,15 @@ mps_all = np.concatenate(mps_all)
 
 **Step 5.**
 
-Extract Axis Labels 
+Extract Axes Labels 
 
 
 
 ```python
 
-# Raw Signal
+# Calculate the raw signal length
 raw_length_sec = (len(wav)/sr)
 raw_length_min = raw_length_sec/60
-
-#number_samples = sr*len(wav)/1000 ?
 
 # Sampling Rate in Mel Spectrogram
 fs_spectrogram = round(len(mel_spec)/(raw_length_sec))#if i roiund it the fs_spec will be 0 
@@ -141,36 +139,59 @@ fs_spectrogram = round(len(mel_spec)/(raw_length_sec))#if i roiund it the fs_spe
 # Sampling rate in MPS 
 fs_mps = round(mps_n_fft/(raw_length_min))
 
- 
-# Extract Axis units for plotting 
+# Extract Axes units for plotting 
 # Calculate step sizes for MPS
 freq_step_log = np.log(mel_spec[1,:])
 freq_step_log = freq_step_log[1] - freq_step_log[0]
 
-time_step_log = mel_spec[:,1]
-time_step_log = time_step_log[1] - time_step_log[0]
-
 # Calculate labels for X and Y axes
 mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) # returns fourier transformed freuqencies which are already shifted (lower freq in center))
-mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = time_step_log))
+mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = 1. /fs_spectrogram)) 
 ```
 
 **Step 6.**
 
-Plot MPS
+Plot Mel Spectrogram of first window and according MPS next to each other
 
 ```python
 
-if plot_mps = True:
-    fig, axs = plt.subplots(1, 2, figsize=(8, 4), sharex = True, sharey = True)
-    for ax, mps_plt in zip(axs, [np.log(mps_plot[0]),np.log(mps_plot).mean(0)]): 
-        ax.pcolormesh(mps_plt, cmap ='viridis',shading = 'float')
-        ax.contour(mps_plt, np.percentile(mps_plt, [80,90,95,99]))
-        #_ = plt.setp(ax, xlim=[-10,10], ylim=[0,9])
-    axs[0].set_title('One Modulation Power Spectrum')
-    axs[1].set_title('Mean Modulation Power Spectrum')
-    axs[0].set_xlabel('Temporal Modulation cyc/s')
-    axs[0].set_ylabel('Spectral Modulation cyc/oct')
+fig, (ax1,ax2)= plt.subplots(1, 2, figsize=(20, 10))
+
+    first_mel = mel_spec[0:mps_n_fft,:]
+    time = np.arange(0,mps_n_fft)*fs_spectrogram
+    frequency = np.arange(0,mel_spec.shape[1])*fs_mps
+
+    image1 = ax1.imshow(first_mel.T, origin = 'lower', aspect = 'auto')
+
+    ax1.set_xticks(np.arange(0,mps_n_fft,20))
+    ax1.set_yticks(np.arange(0,first_mel.shape[1],10))
+    x1 = ax1.get_xticks()
+    y1 = ax1.get_yticks()
+    ax1.set_xticklabels(['{:.0f}'.format(xtick) for xtick in time[x1]])
+    ax1.set_yticklabels(['{:.2f}'.format(ytick) for ytick in frequency[y1]])
+     
+    ax1.set_title('Mel Spectrogram 1st window')
+    ax1.set_ylabel('Frequencyband (Hz)')
+    ax1.set_xlabel('Time (s)')
+    cbar = fig.colorbar(image1, ax = ax1, format='%+2.0f dB')
+    cbar.set_label('dB')
+    
+
+    image2 = ax2.imshow(np.log(mps_plot[0,:,nyquist_mps:].T), origin = 'lower', aspect = 'auto')
+    
+    mps_freqs2 = mps_freqs[nyquist_mps:,]
+    ax2.set_xticks(np.arange(0,len(mps_times),20))
+    ax2.set_yticks(np.arange(0,len(mps_freqs2),8))
+    x2 = ax2.get_xticks()
+    y2 = ax2.get_yticks()
+    ax2.set_xticklabels(['{:.0f}'.format(xtick2) for xtick2 in mps_times[x2]])
+    ax2.set_yticklabels(['{:.2f}'.format(ytick2) for ytick2 in mps_freqs2[y2]])
+     
+    ax2.set_title(' MPS for Mel Spectrogram (1st window)')
+    ax2.set_xlabel('Temporal Modulation (mod/s)')
+    ax2.set_ylabel('Spectral Modulation (cyc/oct)')
+    cbar = fig.colorbar(image2, ax=ax2)
+    cbar.set_label('(log) MPS')
     
     
 ```
@@ -182,7 +203,8 @@ Extract names of the features in the MPS
 
 
 ```python
-names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) for mps_time in mps_times for mps_freq in mps_freqs]
+names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) 
+                  for mps_time in mps_times for mps_freq in mps_freqs]
 ```
 
 **Step 7.**
@@ -190,8 +212,7 @@ names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) fo
 Determine the repitition time between two mps.
 
 ```python
-
-mps_rep_time = fs_spectrogram/mps_hop_length
+mps_rep_time = 1/fs_mps
 ```
 
 **Step 8.**
