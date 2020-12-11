@@ -25,7 +25,7 @@ keyword arguments:
   
 optional arguments:
 ------
-  plot_mps:       bool, plotting the mps (by default set to False)
+  plot_mps:       bool, plotting the mel spectrogram and mps forthe first window side by side (by default set to False)
 
 
 </pre>
