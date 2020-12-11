@@ -68,7 +68,7 @@ if mps_hop_length >= mel_spec.shape[0]:
 # Extracting mps
 mps_all = []
 mps_plot = []
-nyquist_mps = np.ceil(mel_spec.shape[1]/2)
+nyquist_mps = int(np.ceil(mel_spec.shape[1]/2))
 
 
 for i in range(1,101):
@@ -118,7 +118,7 @@ mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = 1. /fs_spectrogram))
 
 
 # PLot Spectrogram and MPS for first window alongside each other
-if plot_mps = True:
+if plot_mps = True: 
     
     fig, (ax1,ax2)= plt.subplots(1, 2, figsize=(20, 10))
 
@@ -127,7 +127,7 @@ if plot_mps = True:
     frequency = np.arange(0,mel_spec.shape[1])*fs_mps
 
     image1 = ax1.imshow(first_mel.T, origin = 'lower', aspect = 'auto')
-    
+
     ax1.set_xticks(np.arange(0,mps_n_fft,20))
     ax1.set_yticks(np.arange(0,first_mel.shape[1],10))
     x1 = ax1.get_xticks()
@@ -140,22 +140,24 @@ if plot_mps = True:
     ax1.set_xlabel('Time (s)')
     cbar = fig.colorbar(image1, ax = ax1, format='%+2.0f dB')
     cbar.set_label('dB')
+    
 
-
-    image2 = ax2.imshow(np.log(mps_plot[0].T), origin = 'lower', aspect = 'auto')
-
+    image2 = ax2.imshow(np.log(mps_plot[0,:,nyquist_mps:].T), origin = 'lower', aspect = 'auto')
+    
+    mps_freqs2 = mps_freqs[nyquist_mps:,]
     ax2.set_xticks(np.arange(0,len(mps_times),20))
-    ax2.set_yticks(np.arange(0,len(mps_freqs),10))
+    ax2.set_yticks(np.arange(0,len(mps_freqs2),8))
     x2 = ax2.get_xticks()
     y2 = ax2.get_yticks()
-    ax2.set_xticklabels(['{:.1f}'.format(xtick2) for xtick2 in mps_times[x2]])
-    ax2.set_yticklabels(['{:.1f}'.format(ytick2) for ytick2 in mps_freqs[y2]])
+    ax2.set_xticklabels(['{:.0f}'.format(xtick2) for xtick2 in mps_times[x2]])
+    ax2.set_yticklabels(['{:.2f}'.format(ytick2) for ytick2 in mps_freqs2[y2]])
      
     ax2.set_title(' MPS for Mel Spectrogram (1st window)')
     ax2.set_xlabel('Temporal Modulation (mod/s)')
     ax2.set_ylabel('Spectral Modulation (cyc/oct)')
     cbar = fig.colorbar(image2, ax=ax2)
     cbar.set_label('(log) MPS')
+
 
     
 # Extracting feature names                     
