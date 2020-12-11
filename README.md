@@ -4,7 +4,7 @@ The code was created as part of a Practical Project at the University of Oldenbu
 This function extracts the Modulation Power Spectrum from an auditory stimulus in a BIDS compliant format.
 The function is based on the MEL spectrogram and the 2D Fourier Transform. 
 
-Use with 
+Use with `python wav_files_to_bids_tsv.py path/to/your/wavfiles/*.wav -c path/to/your/config.json </pre> `. By default extracts the Mel Spectrogram.
 
 # Usage
 <pre> 
