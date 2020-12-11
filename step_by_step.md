@@ -195,7 +195,7 @@ fig, (ax1,ax2)= plt.subplots(1, 2, figsize=(20, 10))
     
     
 ```
-![Mel and MPS](https://user-images.githubusercontent.com/73650127/101890610-3337cb00-3ba1-11eb-9999-99e103356b6f.png)
+![Mel and MPS](https://user-images.githubusercontent.com/73650127/101890816-827dfb80-3ba1-11eb-8bbc-e51e6bdbc8b3.png)
 
 
 **Step 6.**
