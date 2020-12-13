@@ -155,47 +155,53 @@ Plot Mel Spectrogram of first window and according MPS next to each other
 
 ```python
 
-fig, (ax1,ax2)= plt.subplots(1, 2, figsize=(20, 10))
+if plot_mps = True: 
+    
+    fig, (ax1,ax2)= plt.subplots(1, 2, figsize=(20, 10))
 
     first_mel = mel_spec[0:mps_n_fft,:]
     time = np.arange(0,mps_n_fft)*fs_spectrogram
-    frequency = np.arange(0,mel_spec.shape[1])*fs_mps
+    frequency = np.arange(0,mel_spec.shape[1])*(1/fs_mps)
 
-    image1 = ax1.imshow(first_mel.T, origin = 'lower', aspect = 'auto')
+    image = ax1.imshow(first_mel.T, origin = 'lower', aspect = 'auto')
 
-    ax1.set_xticks(np.arange(0,mps_n_fft,20))
+    ax1.set_xticks(np.arange(0,mps_n_fft,50))
     ax1.set_yticks(np.arange(0,first_mel.shape[1],10))
+
     x1 = ax1.get_xticks()
     y1 = ax1.get_yticks()
+
     ax1.set_xticklabels(['{:.0f}'.format(xtick) for xtick in time[x1]])
     ax1.set_yticklabels(['{:.2f}'.format(ytick) for ytick in frequency[y1]])
      
     ax1.set_title('Mel Spectrogram 1st window')
     ax1.set_ylabel('Frequencyband (Hz)')
     ax1.set_xlabel('Time (s)')
-    cbar = fig.colorbar(image1, ax = ax1, format='%+2.0f dB')
+    cbar = fig.colorbar(image, ax = ax1, format='%+2.0f dB')
     cbar.set_label('dB')
-    
 
-    image2 = ax2.imshow(np.log(mps_plot[0,:,nyquist_mps:].T), origin = 'lower', aspect = 'auto')
-    
+    img = ax2.imshow(np.log(mps_plot[0,:,nyquist_mps:].T), origin = 'lower', aspect = 'auto')
+
     mps_freqs2 = mps_freqs[nyquist_mps:,]
-    ax2.set_xticks(np.arange(0,len(mps_times),20))
-    ax2.set_yticks(np.arange(0,len(mps_freqs2),8))
+
+    ax2.set_xticks(np.arange(0,len(mps_times),50))
+    ax2.set_yticks(np.arange(0,len(mps_freqs2),10))
+
     x2 = ax2.get_xticks()
     y2 = ax2.get_yticks()
+
     ax2.set_xticklabels(['{:.0f}'.format(xtick2) for xtick2 in mps_times[x2]])
     ax2.set_yticklabels(['{:.2f}'.format(ytick2) for ytick2 in mps_freqs2[y2]])
      
     ax2.set_title(' MPS for Mel Spectrogram (1st window)')
     ax2.set_xlabel('Temporal Modulation (mod/s)')
     ax2.set_ylabel('Spectral Modulation (cyc/oct)')
-    cbar = fig.colorbar(image2, ax=ax2)
+    cbar = fig.colorbar(img, ax=ax2)
     cbar.set_label('(log) MPS')
     
     
 ```
-![Mel and MPS](https://user-images.githubusercontent.com/73650127/101890816-827dfb80-3ba1-11eb-8bbc-e51e6bdbc8b3.png)
+![Mel and MPS](https://user-images.githubusercontent.com/73650127/102018439-8199c500-3d6d-11eb-8e87-a5c81102e3c0.png)
 
 
 **Step 6.**
