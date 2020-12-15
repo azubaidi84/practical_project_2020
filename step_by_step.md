@@ -1,7 +1,7 @@
 # MPS Feature Extractor
 ***
 
-### This is a function to extract the Modulation Power Spectrum based on the MEL Spectrogram with a 2D Fourier Transform from wav files. It is implemented in the script ![wav_files_to_bids_tsv_2.py](https://github.com/jannenold/practical_project_2020/blob/main/wav_files_to_bids_tsv_2.py) and should only be used with that script. This step-by-step Markdown aims to explain the individual steps only of the function mps_extract inside that script. 
+### This is a function to extract the Modulation Power Spectrum based on the MEL Spectrogram with a 2D Fourier Transform from wav files. It is implemented in the script ![wav_files_to_bids_tsv_2.py](https://github.com/jannenold/practical_project_2020/blob/main/wav_files_to_bids_tsv_2.py) and should only be used within that script. This step-by-step Markdown aims to explain the individual steps only of the function mps_extract inside that script. 
 ***
 
 The output is stored in BIDS format. 
