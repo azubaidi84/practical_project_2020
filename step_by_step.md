@@ -156,10 +156,16 @@ Plot Mel Spectrogram of first window and according MPS next to each other
 ```python
 
 if plot_mps:
-       fig, (ax1,ax2)= plt.subplots(1, 2, figsize=(20, 10)) 
+       fig, (ax1,ax2)= plt.subplots(1, 2, figsize=(20, 10))
+       
+       # use only first window of Mel spectrogram to plot
        first_mel = mel_spec[0:mps_n_fft,:]
+       
+       #extract time and frequency axes
        time = np.arange(0,mps_n_fft)*fs_spectrogram
        frequency = np.arange(0,mel_spec.shape[1])*fs_mps
+       
+       # define first plot (Mel spectrgram)
        image1 = ax1.imshow(first_mel.T, origin = 'lower', aspect = 'auto')
        ax1.set_xticks(np.arange(0,mps_n_fft,20))
        ax1.set_yticks(np.arange(0,first_mel.shape[1],10))
@@ -172,7 +178,11 @@ if plot_mps:
        ax1.set_xlabel('Time (s)')
        cbar = fig.colorbar(image1, ax = ax1, format='%+2.0f dB')
        cbar.set_label('dB')
+       
+       # define second plot (MPS for Mel spectrogram first window)
        image2 = ax2.imshow(np.log(mps_plot[0,:,nyquist_mps:].T), origin = 'lower', aspect = 'auto')
+       
+       # use only half of the frequqecies (up to Niquist so the MPS is not mirrored)
        mps_freqs2 = mps_freqs[nyquist_mps:,]
        ax2.set_xticks(np.arange(0,len(mps_times),20))
        ax2.set_yticks(np.arange(0,len(mps_freqs2),8))
