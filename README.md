@@ -13,7 +13,7 @@ usage: mps_extract.py
 
 positional arguments:
 -------
-  filename :      str, path to wav files to be converted. Can be used with wildcard * .wav. 
+  filename :      str, path to wav files to be converted. Can be used with wildcard *.wav. 
 
 keyword arguments:
 ------
@@ -26,7 +26,7 @@ keyword arguments:
   
 optional arguments:
 ------
-  plot_mps:       bool, plotting the mel spectrogram and mps forthe first window side by side (by default set to False)
+  plot_mps:       bool, plotting the mel spectrogram and mps forthe first window side by side (by default set to True)
 
 
 </pre>
@@ -41,6 +41,6 @@ The function returns three outputs:
 
 **Optional**
 
-The function can return the plotted MPS. By default, this is set to False and has to be indicated if needed otherwise.
+The function can return the plotted MPS. By default, this is set to True and has to be indicated if needed otherwise.
 
 *Note*: Default settings are set so the windows for the extraction of the Mel spectrogram and the MPS each are non-overlapping.
