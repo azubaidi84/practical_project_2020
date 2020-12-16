@@ -53,9 +53,9 @@ def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft =
    
     fs_spectrogram = sr/hop_length
     fs_mps = fs_spectrogram/mps_hop_length
-   
-    freq_step_log = np.log(mel_spec[1,:])
-    freq_step_log = freq_step_log[1] - freq_step_log[0]
+    
+    mel_freqs = lbr.mel_frequencies(n_mels = 64)
+    freq_step_log = np.log(mel_freqs[2]) - np.log(mel_freqs[1])
    
     mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) 
     mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = 1. /fs_spectrogram)) 
