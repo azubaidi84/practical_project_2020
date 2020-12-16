@@ -17,22 +17,24 @@ The output is stored in BIDS format.
 import numpy as np
 import joblib
 import glob
+import matplotlib.pyplot as plt
 import json
 import os
 import librosa as lbr
 
-def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft = 500, mps_hop_length = 500, plot_mps = True, **kwargs):
+def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft = 500, mps_hop_length = 500, n_mels = 64, plot_mps = True, **kwargs):
     '''                
     Parameters
     ----------
     
     filename:       str, path to wav files to be converted
     sr:             int, sampling rate for wav file (Default: 44100 Hz)
-    n_fft:          int, window size for mel spectrogram extraction (Default: 512)
-    hop_length:     int, step size for mel spectrogram extraction (Default: 512)
+    n_fft:          int, window size for mel spectrogram extraction (Default: 441)
+    hop_length:     int, step size for mel spectrogram extraction (Default: 441)
     mps_n_fft:      int, window size for mps extraction (Default: 500)
     mps_hop_length: int, step size for mps extraction (Default: 500)
-    plot_mps:       bool, if true the Mel spectrogram for the first window and according mps will be plotted (Default: True)
+    n_mels:         int, numbers of mels used (Default: 64)
+    plot_mps:       bool, if true the Mel spectrogram for the first window and according mps will be plotted (Default: False)
     kwargs:         additional keyword arguments that will be transferred to librosa's melspectrogram function
     
     Returns
@@ -68,9 +70,9 @@ def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft =
    
     fs_spectrogram = sr/hop_length
     fs_mps = fs_spectrogram/mps_hop_length
-   
-    freq_step_log = np.log(mel_spec[1,:])
-    freq_step_log = freq_step_log[1] - freq_step_log[0]
+    
+    mel_freqs = lbr.mel_frequencies(n_mels = n_mels, **{param: kwargs[param] for param in ['n_mels', 'fmin', 'fmax', 'htk'] if param in kwargs})
+    freq_step_log = np.log(mel_freqs[2]) - np.log(mel_freqs[1])
    
     mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) 
     mps_times = np.fft.fftshift(np.fft.fftfreq(mps_n_fft, d = 1. /fs_spectrogram)) 
