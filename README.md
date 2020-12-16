@@ -22,6 +22,7 @@ keyword arguments:
   mps_n_fft:      int, window length for extracting the MPS (default 500)
   hop_length:     int, step size for extracting MEL spectrogram (default 441)
   mps_hop_length: int, step size for extracting MPS (default 500)
+  n_mels:         int, number of mels used (default 64)
   
   
 optional arguments:
