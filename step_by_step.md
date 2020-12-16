@@ -141,9 +141,9 @@ fs_spectrogram = round(len(mel_spec)/(raw_length_sec))#if i roiund it the fs_spe
 fs_mps = round(mps_n_fft/(raw_length_min))
 
 # Extract Axes units for plotting 
-# Calculate step sizes for MPS
-freq_step_log = np.log(mel_spec[1,:])
-freq_step_log = freq_step_log[1] - freq_step_log[0]
+# Calculate step sizes for MPS based on the logarithmic frequencies
+mel_freqs = lbr.mel_frequencies(n_mels = n_mels, **{param: kwargs[param] for param in ['n_mels', 'fmin', 'fmax', 'htk'] if param in kwargs})
+freq_step_log = np.log(mel_freqs[2]) - np.log(mel_freqs[1])
 
 # Calculate labels for X and Y axes
 mps_freqs = np.fft.fftshift(np.fft.fftfreq(mel_spec.shape[1], d = freq_step_log)) # returns fourier transformed freuqencies which are already shifted (lower freq in center))
