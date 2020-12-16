@@ -1,6 +1,7 @@
 import numpy as np
 import joblib
 import glob
+import matplotlib.pyplot as plt
 import json
 import os
 import librosa as lbr
