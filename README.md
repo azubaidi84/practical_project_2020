@@ -18,9 +18,9 @@ positional arguments:
 keyword arguments:
 ------
   sr:             int, sampling rate (Hz) of auditory files (set to 44100 Hz by default)
-  n_fft:          int, window length of spectrogram (default 512)
+  n_fft:          int, window length of spectrogram (default 441)
   mps_n_fft:      int, window length for extracting the MPS (default 500)
-  hop_length:     int, step size for extracting MEL spectrogram (default 512)
+  hop_length:     int, step size for extracting MEL spectrogram (default 441)
   mps_hop_length: int, step size for extracting MPS (default 500)
   
   
