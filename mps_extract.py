@@ -21,7 +21,7 @@ import json
 import os
 import librosa as lbr
 
-def mps_extract(filename, sr = 44100, n_fft = 512, hop_length = 512, mps_n_fft = 500, mps_hop_length = 500, plot_mps = True, **kwargs):
+def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft = 500, mps_hop_length = 500, plot_mps = True, **kwargs):
     '''                
     Parameters
     ----------
