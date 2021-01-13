@@ -193,7 +193,7 @@ if plot_mps:
        ax2.set_yticks(np.arange(0,len(mps_freqs2),8))
        x2= ax2.get_xticks()
        y2= ax2.get_yticks()
-       ax2.set_xticklabels(['{:.0f}'.format(xtick2) for xtick2 in mps_times[x2]])
+       ax2.set_xticklabels(['{:.0f}'.format(xtick2) for xtick2 in mps_times2[x2]])
        ax2.set_yticklabels(['{:.2f}'.format(ytick2) for ytick2 in mps_freqs2[y2]])
        ax2.set_title(' MPS for Mel Spectrogram (1st window)')
        ax2.set_xlabel('Temporal Modulation (mod/s)')
