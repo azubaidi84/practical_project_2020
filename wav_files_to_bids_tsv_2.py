@@ -80,6 +80,7 @@ def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft =
        cbar.set_label('dB')
        image2 = ax2.imshow(np.log(mps_plot[0,:,nyquist_mps:].T), origin = 'lower', aspect = 'auto')
        mps_freqs2 = mps_freqs[nyquist_mps:,]
+       mps_times2 = mps_times[int(mps_n_fft/2):,]
        ax2.set_xticks(np.arange(0,len(mps_times),20))
        ax2.set_yticks(np.arange(0,len(mps_freqs2),8))
        x2= ax2.get_xticks()
@@ -93,7 +94,7 @@ def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft =
        cbar.set_label('(log) MPS')
    
    	# Extracting feature names                     
-    names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) for mps_time in mps_times for mps_freq in mps_freqs]
+    names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) for mps_time in mps_times2 for mps_freq in mps_freqs2]
    
    	# Determine MPS repitition time 
     mps_rep_time = 1/fs_mps
