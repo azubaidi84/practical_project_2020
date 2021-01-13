@@ -185,6 +185,10 @@ if plot_mps:
        
        # use only half of the frequqecies (up to Niquist so the MPS is not mirrored)
        mps_freqs2 = mps_freqs[nyquist_mps:,]
+       
+       # use only the right side off the mirrored Y axis 
+       mps_times2 = mps_times[int(mps_n_fft/2):,]
+       
        ax2.set_xticks(np.arange(0,len(mps_times),20))
        ax2.set_yticks(np.arange(0,len(mps_freqs2),8))
        x2= ax2.get_xticks()
