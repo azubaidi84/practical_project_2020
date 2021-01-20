@@ -44,6 +44,7 @@ def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft =
     for i in range(1,101):
         mps = np.fft.fft2(mel_spec[mps_n_fft*(i-1):mps_n_fft*i,:])
         mps = np.abs(np.fft.fftshift(mps))
+        mps = mps[int(mps_n_fft/2):,nyquist_mps:]
         mps_plot.append(mps)
         mps = np.reshape(mps,(1,np.size(mps)))
         mps_all.append(mps)
@@ -78,10 +79,10 @@ def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft =
        ax1.set_xlabel('Time (s)')
        cbar = fig.colorbar(image1, ax = ax1, format='%+2.0f dB')
        cbar.set_label('dB')
-       image2 = ax2.imshow(np.log(mps_plot[0,:,nyquist_mps:].T), origin = 'lower', aspect = 'auto')
+       image2 = ax2.imshow(np.log(mps_plot[0,:,:].T), origin = 'lower', aspect = 'auto')
        mps_freqs2 = mps_freqs[nyquist_mps:,]
        mps_times2 = mps_times[int(mps_n_fft/2):,]
-       ax2.set_xticks(np.arange(0,len(mps_times),20))
+       ax2.set_xticks(np.arange(0,len(mps_times2),20))
        ax2.set_yticks(np.arange(0,len(mps_freqs2),8))
        x2= ax2.get_xticks()
        y2= ax2.get_yticks()
