@@ -103,6 +103,9 @@ for i in range(1,101):
     # use absoulte and shifted frequencies
     mps = np.abs(np.fft.fftshift(mps))
     
+    # only take quarter of complete MPS (due to mirroring)
+    mps = mps[int(mps_n_fft/2):,nyquist_mps:]
+    
     # Define variable for later plotting
     mps_plot.append(mps)
    
@@ -181,7 +184,7 @@ if plot_mps:
        cbar.set_label('dB')
        
        # define second plot (MPS for Mel spectrogram first window)
-       image2 = ax2.imshow(np.log(mps_plot[0,:,nyquist_mps:].T), origin = 'lower', aspect = 'auto')
+       image2 = ax2.imshow(np.log(mps_plot[0,:,:].T), origin = 'lower', aspect = 'auto')
        
        # use only half of the frequqecies (up to Niquist so the MPS is not mirrored)
        mps_freqs2 = mps_freqs[nyquist_mps:,]
@@ -189,7 +192,7 @@ if plot_mps:
        # use only the right side off the mirrored Y axis 
        mps_times2 = mps_times[int(mps_n_fft/2):,]
        
-       ax2.set_xticks(np.arange(0,len(mps_times),20))
+       ax2.set_xticks(np.arange(0,len(mps_times2),20))
        ax2.set_yticks(np.arange(0,len(mps_freqs2),8))
        x2= ax2.get_xticks()
        y2= ax2.get_yticks()
