@@ -31,7 +31,7 @@ def mps_extract(filename, sr = 44100, n_fft= 441, hop_length = 441, mps_n_fft = 
 - repitition time in seconds: 
 - names of all features (list of strings of mod/s for each mod/Hz):   
    
-*Note*: Default settings are set so the windows for the extraction of the Mel spectrogram and the MPS each are non-overlapping.
+*Note*: Default settings are set so the windows for the extraction of the Mel spectrogram and the MPS each are non-overlapping. The values of 441 / 500 for the window length and hop lenght were chose as a multiple of the sampling rates (Audio 44100 /Mel 100) to minimise rounding errors. 
 
 **Load Packages**
 
