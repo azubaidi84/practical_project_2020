@@ -40,8 +40,9 @@ def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft =
      
     mps_all = []
     mps_plot = []
+    n_hops = int((mel_spec.shape[0]/mps_hop_length)+1)
     nyquist_mps = int(np.ceil(mel_spec.shape[1]/2))
-    for i in range(1,101):
+    for i in range(1,n_hops):
         mps = np.fft.fft2(mel_spec[mps_n_fft*(i-1):mps_n_fft*i,:])
         mps = np.abs(np.fft.fftshift(mps))
         mps = mps[int(mps_n_fft/2):,nyquist_mps:]
