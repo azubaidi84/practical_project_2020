@@ -6,17 +6,17 @@ import json
 import os
 import librosa as lbr
 
-def mps_extract(filename, sr = 44100, n_fft = 441, hop_length = 441, mps_n_fft = 500, mps_hop_length = 500, n_mels = 64, plot_mps = True, **kwargs):
+def mps_extract(filename, sr = 44100, n_fft = 8820, hop_length = 8820, mps_n_fft = 100, mps_hop_length = 100, n_mels = 64, plot_mps = True, **kwargs):
     '''                
     Parameters
     ----------
     
     filename:       str, path to wav files to be converted
     sr:             int, sampling rate for wav file (Default: 44100 Hz)
-    n_fft:          int, window size for mel spectrogram extraction (Default: 441)
-    hop_length:     int, step size for mel spectrogram extraction (Default: 441)
-    mps_n_fft:      int, window size for mps extraction (Default: 500)
-    mps_hop_length: int, step size for mps extraction (Default: 500)
+    n_fft:          int, window size for mel spectrogram extraction (Default: 8820 Hz)
+    hop_length:     int, step size for mel spectrogram extraction (Default: 8820 Hz)
+    mps_n_fft:      int, window size for mps extraction (Default: 100)
+    mps_hop_length: int, step size for mps extraction (Default: 100)
     n_mels:         int, numbers of mels used (Default: 64)
     plot_mps:       bool, if true the Mel spectrogram for the first window and according mps will be plotted (Default: False)
     kwargs:         additional keyword arguments that will be transferred to librosa's melspectrogram function
