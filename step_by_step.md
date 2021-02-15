@@ -9,18 +9,18 @@ The output is stored in BIDS format.
 
 
 ```python
-def mps_extract(filename, sr = 44100, n_fft= 441, hop_length = 441, mps_n_fft = 500, 
-                mps_hop_length = 500, n_mels = 64, plot_mps = True, **kwargs) 
+def mps_extract(filename, sr = 44100, n_fft= 882, hop_length = 882, mps_n_fft = 100, 
+                mps_hop_length = 100, n_mels = 64, plot_mps = True, **kwargs) 
 ```
     
 ### Input
 
 - filename:        str, path to wav files to be converted
 - sr:              int, sampling rate for wav file (*Default*: 44100 Hz)
-- n_fft:           int, window size for mel spectrogram extraction (*Default*:441)
-- hop_length:      int, step size for mel spectrogram extraction (*Default*: 441)
-- mps_n_fft:       int, window size for mps extraction (*Default*: 500)
-- mps_hop_length:  int, step size for mps extraction (*Default*: 500)
+- n_fft:           int, window size for mel spectrogram extraction (*Default*:882)
+- hop_length:      int, step size for mel spectrogram extraction (*Default*: 882)
+- mps_n_fft:       int, window size for mps extraction (*Default*: 100)
+- mps_hop_length:  int, step size for mps extraction (*Default*: 100)
 - n_mels:          int, number of mels used (*Default*: 64)
 - plot_mps:        bool, plotting the mel spectrogram and mps forthe first window side by side (*Default*: True)
 - kwargs:          additional keyword arguments that will be transferred to librosa's melspectrogram function
@@ -223,12 +223,12 @@ names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq)
 Determine the repitition time between two mps.
 
 ```python
-mps_rep_time = 1/fs_mps
+stim_TR = fs_mps
 ```
 
 **Step 8.**
 Declare output. 
 
 ```python
-return mps_all, mps_rep_time, names_features
+return mps_all, stim_TR, names_features
 ```
