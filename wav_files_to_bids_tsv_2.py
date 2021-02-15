@@ -6,15 +6,15 @@ import json
 import os
 import librosa as lbr
 
-def mps_extract(filename, sr = 44100, n_fft = 8820, hop_length = 8820, mps_n_fft = 100, mps_hop_length = 100, n_mels = 64, plot_mps = True, **kwargs):
+def mps_extract(filename, sr = 44100, n_fft = 882, hop_length = 882, mps_n_fft = 100, mps_hop_length = 100, n_mels = 64, plot_mps = True, **kwargs):
     '''                
     Parameters
     ----------
     
     filename:       str, path to wav files to be converted
     sr:             int, sampling rate for wav file (Default: 44100 Hz)
-    n_fft:          int, window size for mel spectrogram extraction (Default: 8820 Hz)
-    hop_length:     int, step size for mel spectrogram extraction (Default: 8820 Hz)
+    n_fft:          int, window size for mel spectrogram extraction (Default: 882)
+    hop_length:     int, step size for mel spectrogram extraction (Default: 882)
     mps_n_fft:      int, window size for mps extraction (Default: 100)
     mps_hop_length: int, step size for mps extraction (Default: 100)
     n_mels:         int, numbers of mels used (Default: 64)
@@ -25,7 +25,7 @@ def mps_extract(filename, sr = 44100, n_fft = 8820, hop_length = 8820, mps_n_fft
     -------
     
     tuple of a feature representation (2-dimensional array: samples x feature)
-    repitition time in seconds
+    sampling rate
     names of all features (list of strings of mod/s for each mod/Hz)        
     
     '''
@@ -99,9 +99,9 @@ def mps_extract(filename, sr = 44100, n_fft = 8820, hop_length = 8820, mps_n_fft
     names_features = ['{0:.2f} mod/s {1:.2f} cyc/oct)'.format(mps_time, mps_freq) for mps_time in mps_times2 for mps_freq in mps_freqs2]
    
    	# Determine MPS repitition time 
-    mps_rep_time = 1/fs_mps
+    stim_TR = fs_mps
                        
-    return mps_all, mps_rep_time, names_features
+    return mps_all, stim_TR, names_features
 
 
 def get_mel_spectrogram(filename, log=True, sr=44100, hop_length=512, **kwargs):
