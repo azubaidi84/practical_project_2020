@@ -18,10 +18,10 @@ positional arguments:
 keyword arguments:
 ------
   sr:             int, sampling rate of auditory files (samples per second: 44100 Hz by default)
-  n_fft:          int, window length of spectrogram (default 441)
-  mps_n_fft:      int, window length for extracting the MPS (default 500)
-  hop_length:     int, step size for extracting MEL spectrogram (default 441)
-  mps_hop_length: int, step size for extracting MPS (default 500)
+  n_fft:          int, window length of spectrogram (default 882)
+  mps_n_fft:      int, window length for extracting the MPS (default 100)
+  hop_length:     int, step size for extracting MEL spectrogram (default 882)
+  mps_hop_length: int, step size for extracting MPS (default 100)
   n_mels:         int, number of mels used (default 64)
   
   
@@ -37,7 +37,7 @@ optional arguments:
 The function returns three outputs:
 
 1. a representation of a feature matrix of shape (samples x features)
-2. sampling rate (int)
+2. Stimulus Repetition Time (int)
 3. the names of the features (as list of strings)
 
 **Optional**
