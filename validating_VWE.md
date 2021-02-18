@@ -9,6 +9,7 @@
 
 **Load Packages**
 
+``` python
 import json
 from nilearn.masking import unmask
 import nilearn
@@ -21,17 +22,20 @@ import numpy as np
 from nilearn.image import threshold_stats_img
 from nilearn.input_data import MultiNiftiMasker
 from nilearn.masking import compute_brain_mask
-
+```
 **Installing the Voxelwiseencoing app**
 
+```python
 !pip install -e /your_datapath/voxelwiseencoding
+```
 
 **Defining the paramters used in extracting the MPS**
 
+```python
 mel_params = {'n_mels': 64, 'sr': 44100, 'hop_length': 882, 'n_fft': 882, 'fmax': 8000,'mps_hop_length': 100, 'mps_n_fft':100}
 with open('config.json', 'w+') as fl:
     json.dump(mel_params, fl)
-    
+```    
 
 **Extracting Modulation Power Spectrum**
 
