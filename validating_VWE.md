@@ -1,7 +1,7 @@
 # Validating the Voxelwiseencoding Model
 ***
 
-### This step-by-step guide provides guidance for running the ![voxelwiseencoding app](https://mjboos.github.io/voxelwiseencoding/) for the Modulation Power Spectrum and different parameters for stimulus length used and offset of the fMRI data. The Voxelwissencoding app allows to train voxelwiseendocing models on naturalistic stimuli.The output after this validation are Correlation Scores (Pearson Correlation) corrected for multiple correlation and thresholded to > 0 (to account for over-correction of the model). 
+### This step-by-step guide provides guidance for running the ![voxelwiseencoding app](https://mjboos.github.io/voxelwiseencoding/)  by ![Moritz Boos](https://mjboos.github.io/) for the Modulation Power Spectrum and different parameters for stimulus length used and offset of the fMRI data. The Voxelwissencoding app allows to train voxelwiseendocing models on naturalistic stimuli.The output after this validation are Correlation Scores (Pearson Correlation) corrected for multiple correlation and thresholded to > 0 (to account for over-correction of the model). 
 
 ***
 
