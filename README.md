@@ -1,19 +1,16 @@
 # practical_project_2020
 The code was created as part of a Practical Project at the University of Oldenburg in 2020 under supervision of Moritz Boos and Dr. Arkan Al-Zubaidi. 
 
-This function extracts the Modulation Power Spectrum from an auditory stimulus in a BIDS compliant format.
+1) **Extracting** the Modulation Power Spectrum: This function extracts the Modulation Power Spectrum from an auditory stimulus in a BIDS compliant format.
 The function is based on the MEL spectrogram and the 2D Fourier Transform. 
 
 Use with `python wav_files_to_bids_tsv_2.py path/to/your/wavfiles/*.wav -c path/to/your/config.json`. By default extracts the Mel Spectrogram. 
 For a fully commented script and step by step explanation please refer to the [step-by-step Markdown File](https://github.com/jannenold/practical_project_2020/blob/main/step_by_step.md) here.
 
-Alternative: Use the Voxelwiseencoding App by Moritz Boos (for a step by step application, see [Validating VWE](https://github.com/jannenold/practical_project_2020/edit/main/validating_VWE.md))
+2) **Validate** the model: Use the Voxelwiseencoding App by Moritz Boos (for a step by step application, see [Validating VWE](https://github.com/jannenold/practical_project_2020/edit/main/validating_VWE.md))
 
-# Usage
+# Usage for extracting the MPS 
 <pre> 
-usage: mps_extract.py 
-
-
 positional arguments:
 -------
   filename :      str, path to wav files to be converted. Can be used with wildcard *.wav. 
