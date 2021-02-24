@@ -4,6 +4,10 @@
 ### This step-by-step guide provides guidance for running the ![voxelwiseencoding app](https://mjboos.github.io/voxelwiseencoding/)  by ![Moritz Boos](https://mjboos.github.io/) for the Modulation Power Spectrum and different parameters for stimulus length used and offset of the fMRI data. The Voxelwissencoding app allows to train voxelwiseendocing models on naturalistic stimuli.The output after this validation are Correlation Scores (Pearson Correlation) corrected for multiple correlation and thresholded to > 0 (to account for over-correction of the model). 
 
 ***
+**Installing the Voxelwiseencoing app (install in Console, not in sypder/anaconda)**
+
+pip install -e /your_datapath/voxelwiseencoding
+
 
 # Requirements:  Naturalistic auditory data (speech) in BIDS compliant format. 
 
@@ -22,12 +26,6 @@ import numpy as np
 from nilearn.image import threshold_stats_img
 from nilearn.input_data import MultiNiftiMasker
 from nilearn.masking import compute_brain_mask
-```
-**Installing the Voxelwiseencoing app**
-**Install in Console**
-
-```python
-!pip install -e /your_datapath/voxelwiseencoding
 ```
 
 **Defining the paramters used in extracting the MPS**
