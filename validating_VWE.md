@@ -5,7 +5,7 @@
 
 ***
 
-# Requirements: Data in BIDS compliant format. 
+# Requirements:  Naturalistic auditory data (speech) in BIDS compliant format. 
 
 **Load Packages**
 
@@ -24,6 +24,7 @@ from nilearn.input_data import MultiNiftiMasker
 from nilearn.masking import compute_brain_mask
 ```
 **Installing the Voxelwiseencoing app**
+**Install in Console**
 
 ```python
 !pip install -e /your_datapath/voxelwiseencoding
