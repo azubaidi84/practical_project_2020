@@ -7,9 +7,12 @@ The function is based on the MEL spectrogram and the 2D Fourier Transform.
 Use with `python wav_files_to_bids_tsv_2.py path/to/your/wavfiles/*.wav -c path/to/your/config.json`. By default extracts the Mel Spectrogram. 
 For a fully commented script and step by step explanation please refer to the [step-by-step Markdown File](https://github.com/jannenold/practical_project_2020/blob/main/step_by_step.md) here.
 
+Alternative: Use the Voxelwiseencoding App by Moritz Boos (for a step by step application, see [Validating VWE](https://github.com/jannenold/practical_project_2020/edit/main/validating_VWE.md))
+
 # Usage
 <pre> 
 usage: mps_extract.py 
+
 
 positional arguments:
 -------
