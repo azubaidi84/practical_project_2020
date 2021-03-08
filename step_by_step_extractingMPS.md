@@ -67,8 +67,7 @@ mel_spec = lbr.feature.melspectrogram(y=wav, sr=sr, hop_length=hop_length,
 # Transpose Mel spectrogram for further analyses and compatibility
 mel_spec = mel_spec.T
 ```
-![mel](https://user-images.githubusercontent.com/73650127/110309778-0b220180-8002-11eb-9d31-89dca965e0a9.png)
-
+![mel](https://user-images.githubusercontent.com/73650127/110319807-af5e7500-800f-11eb-8f97-bc5bc1e399c6.png)
 
 **Step 3.**
 
@@ -205,7 +204,8 @@ if plot_mps:
        cbar.set_label('(log) MPS')
     
 ```
-![mps](https://user-images.githubusercontent.com/73650127/110309837-20972b80-8002-11eb-94d2-f5f45fc6ba98.png)
+![mps](https://user-images.githubusercontent.com/73650127/110319812-b08fa200-800f-11eb-8e60-8353a82b8e13.png)
+
 
 
 
