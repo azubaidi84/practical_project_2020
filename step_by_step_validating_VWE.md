@@ -35,7 +35,6 @@ mel_params = {'n_mels': 64, 'sr': 44100, 'hop_length': 882, 'n_fft': 882, 'fmax'
 with open('config.json', 'w+') as fl:
     json.dump(mel_params, fl)
 ```    
-![lag](https://user-images.githubusercontent.com/73650127/110309513-b8e0e080-8001-11eb-8bb9-5ce71bf4fc6d.png)
 
 **Extracting Modulation Power Spectrum**
 
@@ -56,6 +55,8 @@ bold_prep_params = {'standardize': 'zscore', 'detrend': True}
 ```
 # Important:
 **This is the part where you can get "creative" and change the lag_time (stimulus length used to predict BOLD data in seconds) and offset_stim (offset of the fMRI data in relation to the stimulus presentation)**
+
+![lag](https://user-images.githubusercontent.com/73650127/110309513-b8e0e080-8001-11eb-8bb9-5ce71bf4fc6d.png)
 
 ```python
 lagging_params = {'lag_time': 6, 'offset_stim': 2}
