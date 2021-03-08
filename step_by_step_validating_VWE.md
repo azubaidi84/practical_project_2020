@@ -35,6 +35,7 @@ mel_params = {'n_mels': 64, 'sr': 44100, 'hop_length': 882, 'n_fft': 882, 'fmax'
 with open('config.json', 'w+') as fl:
     json.dump(mel_params, fl)
 ```    
+![lag](https://user-images.githubusercontent.com/73650127/110309513-b8e0e080-8001-11eb-8bb9-5ce71bf4fc6d.png)
 
 **Extracting Modulation Power Spectrum**
 
@@ -74,6 +75,7 @@ ridges, scores, computed_mask = run_model_for_subject('01', '/data/your_path/ali
                                                       preprocess_kwargs=lagging_params, encoding_kwargs=ridge_params)
                                                       
 ```
+![sub1](https://user-images.githubusercontent.com/73650127/110309543-c5653900-8001-11eb-8898-22b74bee4c92.png)
 
 **(Optional) The output will be the Raw Correlation Scores which can be saved for later analyses**
 
